@@ -29,7 +29,7 @@ const checks=[
  ['MetaMask Connect package',read('package.json').includes('@metamask/connect-evm')&&read('package.json').includes('@metamask/connect-multichain')],
  ['MetaMask Connect cross-platform client',all.includes('createEVMClient')&&all.includes("chainIds:['0x8f']")],
  ['MetaMask analytics disabled',all.includes('analytics:{enabled:false}')],
- ['MetaMask relay allowed by CSP',read('scripts/generate-security.mjs').includes('wss://mm-sdk-relay.api.cx.metamask.io')],
+ ['MetaMask relay allowed by CSP',read('scripts/generate-security.mjs').split(/\r?\n/).some(line=>line.trim()==="const relay='wss://mm-sdk-relay.api.cx.metamask.io'")],
  ['legacy MetaMask SDK absent',!read('package.json').includes('@metamask/sdk"')],
  ['CSP generator',fs.existsSync(path.join(root,'scripts/generate-security.mjs'))],
 ]
