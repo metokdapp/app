@@ -18,7 +18,7 @@ export type ProtocolState = {
   totalSupply:bigint; virtualMon:bigint; realMon:bigint; curveReserve:bigint; circulating:bigint;
   pendingPlay:bigint; claimReserve:bigint; sellEscrow:bigint; p2pSellEscrow:bigint; p2pBuyEscrow:bigint;
   price:bigint; entropyFee:bigint; cardCount:number; nextCurve:bigint; nextSettle:bigint; canSettle:boolean;
-  balance:bigint; credit:bigint; changes:bigint[]; fullWindows:boolean[]; deployedAt:bigint;
+  balance:bigint; monBalance:bigint; credit:bigint; changes:bigint[]; fullWindows:boolean[]; deployedAt:bigint;
   referencePrices:bigint[]; referenceTimestamps:bigint[]; sinceLaunch:bigint;
   nextP2PSell:bigint; nextP2PBuy:bigint; head?:CurveHead;
   entropy:Address; entropyProvider:Address; minOrderLifetime:bigint; maxOrderLifetime:bigint;
@@ -41,7 +41,7 @@ export async function loadProtocol(account?: Address): Promise<ProtocolState> {
     ])
   ])
   const [owner,totalSupply,virtualMon,realMon,curveReserve,circulating,pendingPlay,claimReserve,sellEscrow,p2pSellEscrow,p2pBuyEscrow,price,fee,cardCount,nextCurve,nextSettle,canSettle,bucketsOk,solvent,stats,deployedAt,nextP2PSell,nextP2PBuy,entropy,entropyProvider,minOrderLifetime,maxOrderLifetime] = base
-  const [balance,credit] = account ? await Promise.all([read('balanceOf',[account]),read('withdrawableMon',[account])]) : [0n,0n]
+  const [balance,monBalance,credit] = account ? await Promise.all([read('balanceOf',[account]),publicClient.getBalance({address:account}),read('withdrawableMon',[account])]) : [0n,0n,0n]
   const [changes,fullWindows,referencePrices,referenceTimestamps,sinceLaunch] = stats as [bigint[],boolean[],bigint[],bigint[],bigint]
   let head:CurveHead|undefined
   if(nextSettle<nextCurve){
@@ -53,7 +53,7 @@ export async function loadProtocol(account?: Address): Promise<ProtocolState> {
   return {
     hasCode:!!code && code !== '0x', ownerOk:getAddress(owner)===ZERO, supplyOk:totalSupply===100_000_000_000n*10n**18n,
     bucketsOk,solvent,totalSupply,virtualMon,realMon,curveReserve,circulating,pendingPlay,claimReserve,sellEscrow,p2pSellEscrow,p2pBuyEscrow,
-    price,entropyFee:fee,cardCount:Number(cardCount),nextCurve,nextSettle,canSettle,balance,credit,changes:[...changes],fullWindows:[...fullWindows],deployedAt,
+    price,entropyFee:fee,cardCount:Number(cardCount),nextCurve,nextSettle,canSettle,balance,monBalance,credit,changes:[...changes],fullWindows:[...fullWindows],deployedAt,
     referencePrices:[...referencePrices],referenceTimestamps:[...referenceTimestamps],sinceLaunch,
     nextP2PSell,nextP2PBuy,head,entropy:getAddress(entropy),entropyProvider:getAddress(entropyProvider),minOrderLifetime,maxOrderLifetime,
     blockNumber,chainId,syncedAt:Date.now()
