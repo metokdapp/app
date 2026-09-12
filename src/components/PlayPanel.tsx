@@ -16,7 +16,7 @@ export function PlayPanel({p,address,onRefresh}:{p?:ProtocolState,address?:Addre
   useEffect(()=>{let alive=true;(async()=>{try{const q=wager?await readContract('quotePlay',[wager]):0n;if(alive)setQuote(q)}catch{if(alive)setQuote(undefined)}})();return()=>{alive=false}},[wager])
   const minimum=quote?minOut(quote,slip):0n
   const feeBps=wager&&p?.entropyFee?p.entropyFee*10_000n/wager:0n
-  const feeRatio=feeBps?`${(Number(feeBps)/100).toFixed(2)}%`:'—'
+  const totalSent=wager+(p?.entropyFee||0n)
 
   async function submit(){
     if(!address||!CONTRACT_ADDRESS||!wager) return setMsg('Connect your wallet and enter a valid wager.')
@@ -43,7 +43,7 @@ export function PlayPanel({p,address,onRefresh}:{p?:ProtocolState,address?:Addre
       <div className="cards-choice">{Array.from({length:Math.min(p?.cardCount||3,12)},(_,i)=><button key={i} className={card===i?'selected':''} onClick={()=>setCard(i)}><span>{String(i+1).padStart(2,'0')}</span><b>Card {i+1}</b><em>{card===i?'SELECTED':'PICK'}</em></button>)}</div>
       <Field label="Wager (MON)" hint="The oracle fee is refreshed immediately before signing and added separately to msg.value."><input value={amount} onChange={(e:any)=>setAmount(e.target.value)} inputMode="decimal" placeholder="1.0"/></Field>
       <Field label={`Slippage ${slip/100}%`}><input className="range" type="range" min="0" max="500" step="25" value={slip} onChange={(e:any)=>setSlip(Number(e.target.value))}/></Field>
-      <div className="quote-grid play-quotes"><MiniStat label="Win quote now" value={`${fmt(quote,4)} METOK`}/><MiniStat label="minTokenOut" value={`${fmt(minimum,4)} METOK`}/><MiniStat label="Oracle fee" value={`${fmt(p?.entropyFee,8)} MON`}/><MiniStat label="Fee / wager" value={feeRatio}/><MiniStat label="Deadline" value="3 min"/><MiniStat label="Settlement" value="Strict FIFO"/></div>
+      <div className="quote-grid play-quotes"><MiniStat label="Win quote now" value={`${fmt(quote,4)} METOK`}/><MiniStat label="minTokenOut" value={`${fmt(minimum,4)} METOK`}/><MiniStat label="Oracle fee" value={`${fmt(p?.entropyFee,8)} MON`}/><MiniStat label="Total sent" value={`${fmt(totalSent,8)} MON`}/><MiniStat label="Deadline" value="3 min"/><MiniStat label="Settlement" value="Strict FIFO"/></div>
       {feeBps>1000n&&<div className="risk-banner">The oracle fee is currently more than 10% of the wager. Consider increasing the wager or waiting for the fee to decrease before signing.</div>}
       <Button className="wide primary action-xl" onClick={submit} disabled={busy||!address||!wager}>{busy?<><Spinner/> Processing</>:'PLAY ON-CHAIN'}</Button>
       {msg&&<div className="notice">{msg}</div>}
