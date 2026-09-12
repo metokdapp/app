@@ -18,7 +18,7 @@
     "typescript": "5.9.2",
     "react": "19.1.1",
     "react-dom": "19.1.1",
-    "viem": "2.37.5",
+    "viem": "2.56.3",
     "@metamask/connect-evm": "2.1.1",
     "@metamask/connect-multichain": "1.2.0"
   },
