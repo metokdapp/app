@@ -1,0 +1,55 @@
+METOK V4 DAPP PRO 5.0 — LOCAL VALIDATION REPORT
+=================================================
+Date: 2026-09-12
+Contract: 0xE25AaBa9CBCD0DF6e0b3659c66F1C022a4ED1cf6
+Network: Monad Mainnet / chain 143
+
+SOURCE / PROTOCOL CHECKS
+------------------------
+PASS  22/22 source invariants from `npm run validate`
+PASS  Contract address pinned
+PASS  Chain 143 pinned
+PASS  Reference V4 fixed supply = 100B METOK
+PASS  Reference V4 virtual pricing reserve = 100,000 MON
+PASS  No ERC20 approve write path introduced
+PASS  Exact write is simulated before wallet submission
+PASS  Write-time contract identity checks owner=0 and 100B supply
+PASS  Full V4 custom-error surface included in frontend ABI
+PASS  PLAY/SELL/two-sided P2P event coverage
+PASS  Wallet event index includes reorg rewind buffer
+PASS  eth_getLogs scanner adapts chunk size to RPC limitations
+PASS  Portfolio verifies current curve/claim/P2P mapping state
+PASS  Web Crypto randomness retained for PLAY user contribution
+PASS  Ranked RPC fallback + independent RPC health probe
+PASS  CSP/hosting config generator included
+
+TYPES / SYNTAX
+--------------
+PASS  TypeScript strict source check using local dependency stubs
+      (used only because npm registry was unavailable in this sandbox)
+PASS  TypeScript transpile/parser: 25 TS/TSX implementation files, 0 syntax errors
+
+HOSTING CONFIG
+--------------
+PASS  Cloudflare Pages `public/_headers`
+PASS  Cloudflare Pages `public/_redirects` SPA fallback
+PASS  Vercel `vercel.json` SPA rewrite + security headers
+PASS  CSP connect-src generated from configured RPC origins
+PASS  Long-lived immutable cache header for hashed `/assets/*`
+
+LIMITATION / NOT CLAIMED
+------------------------
+`npm install --no-audit --no-fund` timed out in this sandbox because the npm
+registry was not reachable reliably. Therefore this report DOES NOT claim a
+real dependency install or a completed Vite production build in this sandbox.
+
+Before a real-money public launch, run on Termux/CI with working registry:
+
+  npm install
+  npm audit
+  npm run validate
+  npm run typecheck
+  npm run build
+
+Review and commit the resulting package-lock.json, then use `npm ci` for
+reproducible production builds.
