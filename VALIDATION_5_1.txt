@@ -1,0 +1,38 @@
+
+> metok-v4-dapp@5.1.0 validate
+> node scripts/validate-source.mjs
+
+PASS  contract pinned
+PASS  chain 143
+PASS  V4 source fixed supply
+PASS  V4 source virtual MON
+PASS  no approve flow
+PASS  simulate before wallet write
+PASS  identity check owner zero
+PASS  identity check 100B supply
+PASS  all custom errors in ABI
+PASS  Play events indexed
+PASS  SELL events indexed
+PASS  P2P events indexed
+PASS  wallet event cache reorg buffer
+PASS  adaptive getLogs scanner
+PASS  portfolio verifies curve state
+PASS  portfolio verifies claims
+PASS  portfolio verifies P2P state
+PASS  random uses Web Crypto
+PASS  no seed/private key UX
+PASS  RPC fallback ranking
+PASS  RPC health probe
+PASS  MetaMask Connect package
+PASS  MetaMask Connect cross-platform client
+PASS  MetaMask analytics disabled
+PASS  MetaMask relay allowed by CSP
+PASS  legacy MetaMask SDK absent
+PASS  CSP generator
+
+27/27 checks passed
+
+Additional static checks:
+PASS  25 TS/TSX files parsed/transpiled with TypeScript 5.8.3
+PASS  strict source type-check with dependency stubs
+NOTE  npm registry was not reachable from this sandbox, so a real dependency install/Vite production build is not claimed here.
