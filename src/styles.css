@@ -74,3 +74,483 @@
 .balance-max span{margin:0;color:#7f8a82;font-size:10px}
 .balance-max button{border:1px solid #303831;background:#171d19;color:var(--accent);border-radius:7px;padding:3px 7px;font-size:9px;font-weight:800;cursor:pointer;letter-spacing:.05em}
 .balance-max button:hover{border-color:rgba(200,255,104,.45);background:rgba(200,255,104,.06)}
+
+/* =========================================================
+   METOK UI-ONLY RESPONSIVE SPLIT — 2026-09
+   Presentation layer only. No wallet / contract / tx logic.
+   Desktop 981px+, Tablet 641–980px, Mobile <=640px.
+   ========================================================= */
+
+/* Shared UI polish */
+.topbar,.mobile-nav,.card,.btn,.field input,.segmented,.book-row{
+  -webkit-tap-highlight-color:transparent;
+}
+.card{
+  transition:border-color .18s ease,background-color .18s ease,transform .18s ease;
+}
+.btn,.desktop-nav button,.mobile-nav button,.segmented button{
+  touch-action:manipulation;
+}
+
+/* Desktop UI */
+@media (min-width:981px){
+  .topbar{
+    min-height:80px;
+  }
+  .desktop-nav{
+    padding:4px;
+    border:1px solid rgba(255,255,255,.045);
+    border-radius:14px;
+    background:rgba(255,255,255,.018);
+  }
+  .desktop-nav button{
+    min-height:38px;
+    padding:9px 13px;
+  }
+  .desktop-nav button.active{
+    color:var(--accent);
+    background:rgba(200,255,104,.065);
+    box-shadow:inset 0 0 0 1px rgba(200,255,104,.08);
+  }
+  main{
+    padding-top:52px;
+  }
+  .card:hover{
+    border-color:#303832;
+  }
+  .mobile-nav{
+    display:none!important;
+  }
+}
+
+/* Tablet UI: use touch navigation instead of hiding all navigation */
+@media (min-width:641px) and (max-width:980px){
+  .topbar{
+    height:72px;
+    padding-left:18px;
+    padding-right:18px;
+    gap:16px;
+  }
+  .brand{
+    flex:none;
+  }
+  .top-actions{
+    margin-left:auto;
+  }
+  main{
+    width:min(760px,calc(100% - 32px));
+    padding-top:30px;
+    padding-bottom:118px;
+  }
+  .config-warning,.global-error,.wallet-bridge{
+    width:min(760px,calc(100% - 32px));
+  }
+  .mobile-nav{
+    position:fixed;
+    display:flex!important;
+    left:50%;
+    right:auto;
+    bottom:14px;
+    transform:translateX(-50%);
+    width:min(720px,calc(100% - 28px));
+    height:64px;
+    padding:5px;
+    z-index:40;
+    overflow-x:auto;
+    overflow-y:hidden;
+    border:1px solid #293029;
+    border-radius:18px;
+    background:rgba(12,15,13,.94);
+    backdrop-filter:blur(24px);
+    box-shadow:0 18px 60px rgba(0,0,0,.45);
+    scrollbar-width:none;
+  }
+  .mobile-nav::-webkit-scrollbar{display:none}
+  .mobile-nav button{
+    min-width:88px;
+    flex:1 0 88px;
+    border:0;
+    border-radius:13px;
+    background:none;
+    color:#7d877f;
+    font-size:9px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+  }
+  .mobile-nav button span{font-size:15px}
+  .mobile-nav button.active{
+    color:var(--accent);
+    background:rgba(200,255,104,.065);
+  }
+  footer{
+    display:none;
+  }
+  .price-orb{
+    min-height:360px;
+  }
+}
+
+/* Mobile UI */
+@media (max-width:640px){
+  body{
+    background:radial-gradient(circle at 35% -8%,rgba(200,255,104,.08),transparent 24%),var(--bg);
+  }
+  .ambient{
+    opacity:.065;
+  }
+  .topbar{
+    height:64px;
+    padding:0 10px;
+    gap:8px;
+  }
+  .brand{
+    gap:8px;
+    min-width:0;
+  }
+  .brand-mark{
+    width:32px;
+    height:32px;
+    border-radius:10px;
+  }
+  .brand b{
+    font-size:12px;
+    letter-spacing:.14em;
+  }
+  .brand small{
+    display:none;
+  }
+  .top-actions{
+    margin-left:auto;
+    min-width:0;
+  }
+  .wallet-connected-actions{
+    min-width:0;
+  }
+  .metamask-wallet{
+    min-height:38px;
+    padding:8px 10px!important;
+    border-radius:11px;
+  }
+  .wallet-fox{
+    width:18px;
+    height:18px;
+  }
+  .wallet-label{
+    max-width:82px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .wallet-disconnect{
+    min-height:28px!important;
+    padding:5px 6px!important;
+  }
+  main{
+    width:calc(100% - 20px);
+    padding-top:22px;
+    padding-bottom:108px;
+  }
+  .config-warning,.global-error,.wallet-bridge{
+    width:calc(100% - 20px);
+    border-radius:11px;
+  }
+  .wallet-bridge{
+    margin-top:10px;
+    padding:10px 12px;
+  }
+  .hero{
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .hero-copy{
+    padding:2px 2px 8px;
+  }
+  .hero h1{
+    font-size:clamp(42px,14vw,56px);
+    line-height:.96;
+    margin:18px 0 14px;
+  }
+  .hero p{
+    font-size:13px;
+    line-height:1.62;
+  }
+  .hero-actions{
+    width:100%;
+    margin-top:20px;
+    gap:10px;
+  }
+  .hero-actions .btn{
+    width:100%;
+    min-height:48px;
+  }
+  .hero-actions .ghost-link{
+    width:100%;
+    text-align:center;
+    padding:7px 0;
+    border-bottom:0;
+  }
+  .price-orb{
+    min-height:300px!important;
+    padding:18px;
+  }
+  .price-main{
+    margin:24px 0;
+  }
+  .price-main strong{
+    font-size:clamp(31px,10vw,44px);
+  }
+  .perf-row{
+    display:flex;
+    gap:7px;
+    margin:0 -3px;
+    padding:0 3px 3px;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    scrollbar-width:none;
+  }
+  .perf-row::-webkit-scrollbar{display:none}
+  .perf-row>div{
+    min-width:92px;
+    flex:0 0 92px;
+    scroll-snap-align:start;
+  }
+  .card{
+    padding:16px;
+    border-radius:16px;
+    box-shadow:0 14px 42px rgba(0,0,0,.2);
+  }
+  .section-head{
+    margin-bottom:16px;
+    gap:10px;
+  }
+  .section-head h2,.card h2{
+    font-size:21px;
+  }
+  .card h3{
+    font-size:18px;
+  }
+  .stats-grid,.metric-grid,.portfolio-summary,.security-metrics{
+    gap:8px;
+  }
+  .stat{
+    padding:13px;
+    border-radius:13px;
+  }
+  .stat strong{
+    font-size:14px;
+    margin-top:8px;
+  }
+  .dashboard-grid,.portfolio-grid,.p2p-layout,.security-page,.two-col{
+    gap:10px;
+  }
+  .curve-box{
+    padding:14px;
+    gap:12px;
+  }
+  .cards-choice{
+    gap:7px;
+    margin:15px 0;
+  }
+  .cards-choice button{
+    min-height:74px;
+    padding:13px 10px;
+    border-radius:12px;
+  }
+  .field input{
+    min-height:46px;
+    font-size:16px;
+  }
+  .btn{
+    min-height:44px;
+  }
+  .action-xl{
+    min-height:50px;
+  }
+  .quote-grid{
+    gap:7px;
+  }
+  .mini-stat{
+    padding:11px;
+  }
+  .row-line{
+    gap:12px;
+  }
+  .row-line b{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    text-align:right;
+  }
+
+  /* P2P table becomes touch-friendly cards on phones */
+  .book-card{
+    overflow:visible;
+  }
+  .book-head{
+    display:none;
+  }
+  .book-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .book-row{
+    min-width:0!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px 12px!important;
+    padding:13px!important;
+    border:1px solid #252d27!important;
+    border-radius:13px;
+    background:#0d110e;
+  }
+  .book-row>b{
+    grid-column:1 / -1;
+    font-size:12px;
+    color:var(--text);
+  }
+  .book-row>span{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .book-row>span:nth-of-type(1)::before{content:'Maker';}
+  .book-row>span:nth-of-type(2)::before{content:'Amount';}
+  .book-row>span:nth-of-type(3)::before{content:'Price';}
+  .book-row>span::before{
+    display:block;
+    margin-bottom:4px;
+    color:#657069;
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+  }
+  .book-row>span:nth-of-type(3){
+    grid-column:1 / -1;
+  }
+  .book-actions{
+    grid-column:1 / -1;
+    justify-content:stretch;
+  }
+  .book-actions button{
+    flex:1;
+    min-height:36px;
+    font-size:10px;
+  }
+  .market-summary{
+    gap:6px;
+  }
+  .market-summary>div{
+    padding:10px;
+  }
+  .segmented{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .segmented button{
+    min-height:38px;
+  }
+
+  /* Portfolio / history */
+  .portfolio-hero{
+    gap:14px;
+    padding:2px 2px 10px;
+  }
+  .portfolio-hero h1{
+    font-size:36px;
+    margin-top:5px;
+  }
+  .portfolio-sync{
+    gap:6px;
+  }
+  .my-order{
+    gap:10px;
+  }
+  .my-order .btn{
+    min-height:36px;
+  }
+  .chain-event{
+    gap:9px;
+    padding:12px 0;
+  }
+  .event-icon{
+    width:29px;
+    height:29px;
+  }
+  .filter-chips{
+    overflow-x:auto;
+    padding-bottom:3px;
+    scrollbar-width:none;
+  }
+  .filter-chips::-webkit-scrollbar{display:none}
+  .filter-chips button{
+    flex:none;
+    min-height:34px;
+    padding:7px 12px;
+  }
+
+  /* Bottom navigation: all 7 screens remain reachable */
+  .mobile-nav{
+    left:8px!important;
+    right:8px!important;
+    bottom:8px!important;
+    width:auto!important;
+    height:68px!important;
+    padding:5px 4px max(5px,env(safe-area-inset-bottom))!important;
+    border:1px solid #283029!important;
+    border-radius:18px!important;
+    box-shadow:0 14px 50px rgba(0,0,0,.48);
+    background:rgba(12,15,13,.96)!important;
+  }
+  .mobile-nav button{
+    min-width:66px!important;
+    flex:1 0 66px!important;
+    min-height:54px;
+    border-radius:12px!important;
+  }
+  .mobile-nav button.active{
+    background:rgba(200,255,104,.07)!important;
+  }
+  .mobile-nav button span{
+    font-size:15px;
+  }
+  .tx-fab{
+    right:13px;
+    bottom:86px;
+  }
+  .fill-modal{
+    width:calc(100% - 20px);
+    max-height:calc(100dvh - 24px);
+    overflow:auto;
+  }
+}
+
+/* Very small phones */
+@media (max-width:390px){
+  .topbar{
+    padding-left:8px;
+    padding-right:8px;
+  }
+  .brand>span:last-child{
+    display:none;
+  }
+  .wallet-label{
+    max-width:72px;
+  }
+  .stats-grid,.metric-grid,.portfolio-summary,.security-metrics{
+    grid-template-columns:1fr 1fr;
+  }
+  .card{
+    padding:14px;
+  }
+  .quote-grid,.play-quotes{
+    grid-template-columns:1fr 1fr;
+  }
+  .mobile-nav button{
+    min-width:62px!important;
+    flex-basis:62px!important;
+  }
+}
