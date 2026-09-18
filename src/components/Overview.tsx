@@ -62,6 +62,62 @@ export function Overview({p,address,onPlay}:{p?:ProtocolState,address?:Address,o
         <div><i>03</i><b>Pull payouts</b><span>MON credit is withdrawn by the user.</span></div>
         <div><i>04</i><b>Two-sided P2P</b><span>Buy and sell orders do not change the curve.</span></div>
       </Card>
+
+      <section className="span-3 ecosystem-section">
+        <div className="ecosystem-head">
+          <div>
+            <Label>METOK ECOSYSTEM</Label>
+            <h2>Explore the METOK ecosystem.</h2>
+            <p>Games and decentralized applications built around METOK on Monad.</p>
+          </div>
+          <span className="ecosystem-count">01 LIVE APP</span>
+        </div>
+
+        <div className="ecosystem-grid">
+          <a
+            className="ecosystem-app"
+            href="https://metokdapp.github.io/game/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="ecosystem-app-top">
+              <div className="ecosystem-icon">RPS</div>
+              <span className="ecosystem-live"><i/> LIVE</span>
+            </div>
+
+            <div className="ecosystem-app-body">
+              <span className="ecosystem-type">GAME · MONAD</span>
+              <h3>METOK RPS</h3>
+              <p>Rock · Paper · Scissors · On-chain</p>
+              <small>
+                An on-chain game in the METOK ecosystem.
+                Connect your wallet and play directly on Monad.
+              </small>
+            </div>
+
+            <div className="ecosystem-app-foot">
+              <span>METOK ECOSYSTEM</span>
+              <b>Launch App ↗</b>
+            </div>
+          </a>
+
+          <div className="ecosystem-app ecosystem-coming">
+            <div className="ecosystem-app-top">
+              <div className="ecosystem-icon">+</div>
+              <span>EXPANDING</span>
+            </div>
+
+            <div className="ecosystem-app-body">
+              <span className="ecosystem-type">NEXT APPLICATION</span>
+              <h3>More to come.</h3>
+              <p>The METOK ecosystem is built to grow.</p>
+              <small>
+                Future games and applications will appear here as the ecosystem expands.
+              </small>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </>
 }
