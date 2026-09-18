@@ -186,7 +186,18 @@
     background:rgba(200,255,104,.065);
   }
   footer{
-    display:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:8px 14px;
+    padding:14px 12px 86px;
+    font-size:11px;
+    text-align:center;
+  }
+  footer a{
+    display:inline-block;
+    overflow-wrap:anywhere;
   }
   .price-orb{
     min-height:360px;
